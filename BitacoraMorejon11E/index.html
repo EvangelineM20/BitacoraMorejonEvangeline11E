@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bitacora Evangeline Morejón</title>
+
+    <!-- Logo de la pestaña -->
+    <link rel="icon" type="image/png" href="INSERTALO TU MISMO.">
+
+    <style>
+
+        html, body{
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* ==========================================
+           FONDO GENERAL CON DEGRADADO
+        ========================================== */
+
+        body{
+
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+
+         
+
+            position: relative;
+            overflow-x: hidden;
+        }
+
+
+        /* ==========================================
+           ESTRELLAS DECORATIVAS
+        ========================================== */
+
+        body::before{
+
+            content: "";
+
+            position: fixed;
+            inset: 0;
+
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.9) 2px, transparent 2px),
+                radial-gradient(circle at 80% 30%, rgba(255,182,217,0.8) 2px, transparent 2px),
+                radial-gradient(circle at 35% 70%, rgba(255,255,255,0.8) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 90% 80%, rgba(255,105,180,0.6) 2px, transparent 2px);
+
+            pointer-events: none;
+            z-index: -1;
+
+            animation: estrellas 8s ease-in-out infinite alternate;
+        }
+
+
+        @keyframes estrellas{
+
+            from{
+                transform: translateY(0px);
+            }
+
+            to{
+                transform: translateY(-15px);
+            }
+
+        }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        header{
+
+            padding: 20px;
+
+            background: linear-gradient(
+                90deg,
+                #ebd9de,
+                #eba6bd
+            );
+        }
+
+
+        /* ==========================================
+           TITULO NEÓN
+        ========================================== */
+
+  h1 {
+    color: white;
+    cursor: pointer;
+
+    /* CORREGIDO: "all" va primero, o simplemente no lo pongas */
+    transition: all 0.4s ease;
+
+    text-shadow:
+        0 0 5px #ffffff,
+        0 0 10px #ffffff,
+        0 0 20px #ff69b4,
+        0 0 40px #ff69b4,
+        0 0 60px #ff69b4;
+}
+
+h1:hover {
+    transform: scale(1.15);
+    
+  
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit; /* Evita que el texto se vuelva azul */
+}
+
+        /* ==========================================
+           MAIN
+        ========================================== */
+
+        main{
+
+            flex: 1;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+
+        /* ==========================================
+           TARJETAS
+        ========================================== */
+.semana {
+width: min(94%, 1150px);
+
+
+    margin: 40px auto;
+
+    padding: 30px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.98),
+        rgba(255, 255, 255, 0.95)
+    );
+
+    border-radius: 22px;
+    border: 1px solid rgba(255,182,217,0.35);
+
+    box-shadow:
+        0 0 12px rgba(255,182,217,0.25),
+        0 8px 30px rgba(0,0,0,0.06);
+
+    text-align: left;
+    transition: all 0.35s ease;
+}
+
+.semana:hover {
+    transform: translateY(-6px) scale(1.01);
+
+    box-shadow:
+        0 0 18px rgba(255,20,147,0.30),
+        0 15px 35px rgba(0,0,0,0.10);
+}
+
+.semana h4 {
+    color: #c60e3f;
+    transition: 0.3s;
+}
+
+.semana:hover h4 {
+    color: #ff1493;
+}
+
+
+        /* ==========================================
+           PDF Y VIDEO
+        ========================================== */
+
+                /* ==========================================
+           PDF Y VIDEO (E IMAGEN)
+        ========================================== */
+
+        .pdf-viewer,
+        .video-container{
+
+            margin-top: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+
+        /* CAMBIO: Se agregó , .video-container img al final de esta regla */
+        .pdf-viewer embed,
+        .video-container video,
+        .video-container img{
+
+            width: 100%;
+            border: none;
+            border-radius: 15px;
+
+            transition: 0.3s;
+        }
+
+
+        .pdf-viewer embed{
+
+            height: 400px;
+        }
+
+
+        /* CAMBIO: Se agregó , .video-container img para que mida máximo 400px y se adapte bien */
+        .video-container video,
+        .video-container img{
+
+            max-height: 400px;
+            object-fit: cover; /* Evita que la foto se estire fea */
+        }
+
+        
+
+
+        /* CAMBIO: Se agregó , .video-container img:hover para el efecto neón */
+        .pdf-viewer embed:hover,
+        .video-container video:hover,
+        .video-container img:hover{
+
+            transform: scale(1.01);
+
+            box-shadow:
+                0 0 18px rgba(255,105,180,0.25);
+        }
+
+
+        /* ==========================================
+           FOOTER
+           Usa el mismo rosa del hover del H1
+        ========================================== */
+
+        footer{
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 15px 50px;
+
+            background-color: #ffd6ec;
+
+            color: #8a124d;
+
+            box-shadow:
+                0 0 15px rgba(255,20,147,0.25);
+
+            transition: all 0.4s ease;
+        }
+
+
+        footer:hover{
+
+            box-shadow:
+                0 0 25px rgba(255,20,147,0.45);
+        }
+
+
+        /* ==========================================
+           LOGO
+        ========================================== */
+
+        .logo-colegio{
+
+            transition: transform 0.4s ease;
+            cursor: pointer;
+        }
+
+
+        .logo-colegio:hover{
+
+            transform: scale(1.15);
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media(max-width:768px){
+
+            .semana{
+
+                width: 98%;
+                padding: 18px;
+            }
+
+            footer{
+
+                flex-direction: column;
+                gap: 12px;
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <header>
+
+        <a href="https://youtu.be/dQw4w9WgXcQ?si=Rpv5jg0h9nckr2jB" target="_blank" >
+        <h1>
+            Bitácora Segunda y Tercera Unidad
+        </h1>
+        </a>
+
+
+    </header>
+
+
+
+    <main>
+
+
+        <!-- Semana principal -->
+
+        <div class="semana">
+
+            <h4>
+                Contenido Página WEB
+            </h4>
+
+            <p>
+                Aquí irán las entradas de la bitácora.
+            </p>
+
+        </div>
+
+
+
+        <!-- Semana 1 -->
+
+        <div class="semana">
+
+            <h4>
+                Semana 1: Introducción a Arduino
+            </h4>
+
+            <p>
+                En esta clase, exploré los fundamentos de la placa y sus
+                componentes esenciales. Elaboré un documento PDF detallado
+                donde identifico cada parte del hardware.
+            </p>
+
+
+            <div class="pdf-viewer">
+
+                <embed
+                    src="recursos/Introducción Arduino - Evangeline Morejón.pdf"
+                    type="application/pdf"
+                >
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Semana 2 -->
+
+        <div class="semana">
+
+            <h4>
+                Semana 2: Desarrollo Web
+            </h4>
+
+            <p>
+                Continuamos con el aprendizaje de HTML y CSS,
+                dándole estilo a nuestra bitácora personal y
+                añadiendo elementos multimedia interactivos.
+            </p>
+
+
+            <div class="video-container">
+
+                <video controls>
+
+                    <source
+                        src="recursos/PRIMER Y SEGUNDO CIRCUITO CÓDIGO - EVANGELINE 11E (1).mp4"
+                        type="video/mp4"
+                    >
+
+                </video>
+
+            </div>
+
+        </div>
+
+             <!-- Semana 3 -->
+
+        <div class="semana">
+
+            <h4>
+                Semana 3: Circuito Físico de Arduino
+            </h4>
+
+            <p>
+                Logré avanzar con éxito en el ensamblaje físico del circuito Arduino, adquiriendo un aprendizaje sólido en hardware. La fase de programación queda pendiente para la siguiente etapa del proyecto.
+            </p>
+
+            <!-- CAMBIO: Añadimos el contenedor y limpiamos la etiqueta img -->
+            <div class="video-container">
+                <img class="imagen-circuito" src="recursos/Foto de Circuito Semana 3 U3.jpg" alt="Circuito Arduino">
+            </div>
+
+        </div> <!-- Te faltaba cerrar este div de la semana en tu código original, ¡ojo ahí! -->
+
+    </main>
+
+
+
+    <footer>
+
+        <span>
+           © 2026 @evvymb 
+        </span>
+
+
+        <img
+
+            class="logo-colegio"
+
+            src="https://www.capouilliez.edu.gt/assets/img/logo.png"
+
+            height="45"
+            width="175"
+
+        >
+
+    </footer>
+
+
+</body>
+
+</html>
