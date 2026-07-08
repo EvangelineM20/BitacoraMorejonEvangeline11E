@@ -36,6 +36,40 @@
             overflow-x: hidden;
         }
 
+        /* ==========================================
+   BOTONES DE ZOOM (ABAJO DEL MARCO)
+========================================== */
+.zoom-controls-abajo {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15px; /* Los separa del borde inferior de la foto */
+    margin-bottom: 5px;
+}
+
+.zoom-btn-abajo {
+    background-color: #ffd6ec; /* El rosa tierno de tu footer */
+    color: #8a124d;
+    border: 1px solid rgba(255, 105, 180, 0.3);
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 20px; /* Estilo aesthetic redondito */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+}
+
+.zoom-btn-abajo:hover {
+    background-color: #ff1493; /* El magenta de tus hovers */
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(255, 20, 147, 0.25);
+}
+
+.zoom-btn-abajo:active {
+    transform: translateY(0) scale(0.95);
+}
 
         /* ==========================================
            ESTRELLAS DECORATIVAS
@@ -448,77 +482,56 @@ width: min(94%, 1150px);
 
     </footer>
 
-    <!-- ==========================================
-       SCRIPT DE JAVASCRIPT PARA EL ZOOM AUTOMÁTICO
-    ========================================== */ -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Buscamos todos los contenedores de video/imagen de la página
-            const containers = document.querySelectorAll('.video-container');
-            
-            containers.forEach(container => {
-                // Revisamos si este contenedor tiene una imagen adentro (los videos los ignoramos)
-                const img = container.querySelector('img');
-                if (!img) return; 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Busca todos los contenedores multimedia
+        const containers = document.querySelectorAll('.video-container');
+        
+        containers.forEach(container => {
+            // Solo aplica si el contenedor tiene una imagen (ignora los videos)
+            const img = container.querySelector('img');
+            if (!img) return; 
 
-                // 1. Creamos el contenedor flotante para los botones
-                const controls = document.createElement('div');
-                controls.className = 'zoom-controls';
+            // Creamos la barra de botones
+            const controls = document.createElement('div');
+            controls.className = 'zoom-controls-abajo';
 
-                // 2. Creamos el botón de Zoom In (+)
-                const btnIn = document.createElement('button');
-                btnIn.className = 'zoom-btn';
-                btnIn.textContent = '+';
-                btnIn.title = 'Acercar';
+            // Le metemos los botoncitos con su texto
+            controls.innerHTML = `
+                <button class="zoom-btn-abajo btn-in">Acercar +</button>
+                <button class="zoom-btn-abajo btn-out">Alejar -</button>
+                <button class="zoom-btn-abajo btn-reset">Reiniciar ↺</button>
+            `;
 
-                // 3. Creamos el botón de Zoom Out (-)
-                const btnOut = document.createElement('button');
-                btnOut.className = 'zoom-btn';
-                btnOut.textContent = '-';
-                btnOut.title = 'Alejar';
+            // Los inyectamos justo ABAJO y AFUERA del marco (.video-container)
+            container.insertAdjacentElement('afterend', controls);
 
-                // 4. Creamos el botón de Reiniciar (↺)
-                const btnReset = document.createElement('button');
-                btnReset.className = 'zoom-btn';
-                btnReset.textContent = '↺';
-                btnReset.title = 'Restablecer';
+            let escalaActual = 1;
 
-                // Agrupamos los botones dentro de la cajita flotante
-                controls.appendChild(btnIn);
-                controls.appendChild(btnOut);
-                controls.appendChild(btnReset);
-                container.appendChild(controls);
-
-                // Configuración interna del nivel del Zoom
-                let escalaActual = 1;
-                const maxEscala = 3;    // Máximo zoom (300%)
-                const minEscala = 1;    // Mínimo zoom (Tamaño normal)
-                const paso = 0.25;      // Qué tanto se acerca/aleja en cada click
-
-                // Evento para Acercar
-                btnIn.addEventListener('click', () => {
-                    if (escalaActual < maxEscala) {
-                        escalaActual += paso;
-                        img.style.transform = `scale(${escalaActual})`;
-                    }
-                });
-
-                // Evento para Alejar
-                btnOut.addEventListener('click', () => {
-                    if (escalaActual > minEscala) {
-                        escalaActual -= paso;
-                        img.style.transform = `scale(${escalaActual})`;
-                    }
-                });
-
-                // Evento para reiniciar a tamaño original
-                btnReset.addEventListener('click', () => {
-                    escalaActual = 1;
+            // Evento para Acercar
+            controls.querySelector('.btn-in').addEventListener('click', () => {
+                if (escalaActual < 3) { // Límite de zoom (300%)
+                    escalaActual += 0.25;
                     img.style.transform = `scale(${escalaActual})`;
-                });
+                }
+            });
+
+            // Evento para Alejar
+            controls.querySelector('.btn-out').addEventListener('click', () => {
+                if (escalaActual > 1) { // No deja que se haga más chica del tamaño original
+                    escalaActual -= 0.25;
+                    img.style.transform = `scale(${escalaActual})`;
+                }
+            });
+
+            // Evento para reiniciar
+            controls.querySelector('.btn-reset').addEventListener('click', () => {
+                escalaActual = 1;
+                img.style.transform = `scale(${escalaActual})`;
             });
         });
-    </script>
+    });
+</script>
 
 </body>
 
