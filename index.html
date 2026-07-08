@@ -30,46 +30,12 @@
             flex-direction: column;
             text-align: center;
 
-         
+          
 
             position: relative;
             overflow-x: hidden;
         }
 
-        /* ==========================================
-   BOTONES DE ZOOM (ABAJO DEL MARCO)
-========================================== */
-.zoom-controls-abajo {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 15px; /* Los separa del borde inferior de la foto */
-    margin-bottom: 5px;
-}
-
-.zoom-btn-abajo {
-    background-color: #ffd6ec; /* El rosa tierno de tu footer */
-    color: #8a124d;
-    border: 1px solid rgba(255, 105, 180, 0.3);
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 20px; /* Estilo aesthetic redondito */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
-}
-
-.zoom-btn-abajo:hover {
-    background-color: #ff1493; /* El magenta de tus hovers */
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(255, 20, 147, 0.25);
-}
-
-.zoom-btn-abajo:active {
-    transform: translateY(0) scale(0.95);
-}
 
         /* ==========================================
            ESTRELLAS DECORATIVAS
@@ -215,61 +181,95 @@ width: min(94%, 1150px);
 
 
         /* ==========================================
-           PDF Y VIDEO
-        ========================================== */
-
-                /* ==========================================
-           PDF Y VIDEO (E IMAGEN)
+           MARCOS NEÓN (PDF, VIDEO E IMAGEN)
         ========================================== */
 
         .pdf-viewer,
         .video-container{
-
             margin-top: 20px;
             border-radius: 15px;
             overflow: hidden;
+            position: relative;
+            
+            /* NUEVO: Marco Neón Rosita Claro */
+            border: 3px solid #ffd6ec;
+            box-shadow: 
+                0 0 10px #ffd6ec, 
+                0 0 20px rgba(255, 182, 217, 0.5);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Efecto cuando pasas el mouse sobre cualquier marco neón */
+        .pdf-viewer:hover,
+        .video-container:hover {
+            border-color: #ffb6d9;
+            box-shadow: 
+                0 0 15px #ffb6d9, 
+                0 0 25px rgba(255, 105, 180, 0.7);
         }
 
 
-        /* CAMBIO: Se agregó , .video-container img al final de esta regla */
         .pdf-viewer embed,
         .video-container video,
         .video-container img{
-
             width: 100%;
             border: none;
-            border-radius: 15px;
-
-            transition: 0.3s;
+            border-radius: 12px;
+            /* Eliminamos la transición general de 0.3s aquí para evitar tirones al arrastrar con JS */
         }
 
 
         .pdf-viewer embed{
-
             height: 400px;
         }
 
 
-        /* CAMBIO: Se agregó , .video-container img para que mida máximo 400px y se adapte bien */
         .video-container video,
         .video-container img{
-
             max-height: 400px;
-            object-fit: cover; /* Evita que la foto se estire fea */
+            object-fit: cover; /* Evita deformaciones */
         }
 
-        
+        /* Control de suavidad exclusivo para el cambio de zoom (evita conflictos al arrastrar) */
+        .video-container img.zooming {
+            transition: transform 0.25s ease-out;
+        }
 
 
-        /* CAMBIO: Se agregó , .video-container img:hover para el efecto neón */
-        .pdf-viewer embed:hover,
-        .video-container video:hover,
-        .video-container img:hover{
+        /* ==========================================
+           BOTONES DE ZOOM (ESTÉTICA DE LA PÁGINA)
+        ========================================== */
+        .zoom-controls-abajo {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
 
-            transform: scale(1.01);
+        .zoom-btn-abajo {
+            background-color: #ffd6ec; /* Rosa tierno de tu footer */
+            color: #8a124d;
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            padding: 8px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+            user-select: none;
+        }
 
-            box-shadow:
-                0 0 18px rgba(255,105,180,0.25);
+        .zoom-btn-abajo:hover {
+            background-color: #ff1493; /* Magenta */
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(255, 20, 147, 0.3);
+        }
+
+        .zoom-btn-abajo:active {
+            transform: translateY(0) scale(0.95);
         }
 
 
@@ -353,7 +353,7 @@ width: min(94%, 1150px);
 
         <a href="https://youtu.be/dQw4w9WgXcQ?si=Rpv5jg0h9nckr2jB" target="_blank" >
         <h1>
-            Bitácora Segunda y Tercera Unidad
+             Bitácora Segunda y Tercera Unidad
         </h1>
         </a>
 
@@ -439,7 +439,7 @@ width: min(94%, 1150px);
 
         </div>
 
-             <!-- Semana 3 -->
+        <!-- Semana 3 -->
 
         <div class="semana">
 
@@ -451,12 +451,11 @@ width: min(94%, 1150px);
                 Logré avanzar con éxito en el ensamblaje físico del circuito Arduino, adquiriendo un aprendizaje sólido en hardware. La fase de programación queda pendiente para la siguiente etapa del proyecto.
             </p>
 
-            <!-- CAMBIO: Añadimos el contenedor y limpiamos la etiqueta img -->
             <div class="video-container">
                 <img class="imagen-circuito" src="Foto de Circuito Semana 3 U3.jpg" alt="Circuito Arduino">
             </div>
 
-        </div> <!-- Te faltaba cerrar este div de la semana en tu código original, ¡ojo ahí! -->
+        </div> 
 
     </main>
 
@@ -482,56 +481,104 @@ width: min(94%, 1150px);
 
     </footer>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // Busca todos los contenedores multimedia
-        const containers = document.querySelectorAll('.video-container');
-        
-        containers.forEach(container => {
-            // Solo aplica si el contenedor tiene una imagen (ignora los videos)
-            const img = container.querySelector('img');
-            if (!img) return; 
 
-            // Creamos la barra de botones
-            const controls = document.createElement('div');
-            controls.className = 'zoom-controls-abajo';
+    <!-- ==========================================
+       SCRIPT INTELIGENTE: ZOOM ILIMITADO + DRAG & DROP
+    ========================================== */ -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const containers = document.querySelectorAll('.video-container');
+            
+            containers.forEach(container => {
+                const img = container.querySelector('img');
+                if (!img) return; 
 
-            // Le metemos los botoncitos con su texto
-            controls.innerHTML = `
-                <button class="zoom-btn-abajo btn-in">Acercar +</button>
-                <button class="zoom-btn-abajo btn-out">Alejar -</button>
-                <button class="zoom-btn-abajo btn-reset">Reiniciar ↺</button>
-            `;
+                // Creamos los botones abajo del marco
+                const controls = document.createElement('div');
+                controls.className = 'zoom-controls-abajo';
+                controls.innerHTML = `
+                    <button class="zoom-btn-abajo btn-in">Acercar +</button>
+                    <button class="zoom-btn-abajo btn-out">Alejar -</button>
+                    <button class="zoom-btn-abajo btn-reset">Reiniciar ↺</button>
+                `;
+                container.insertAdjacentElement('afterend', controls);
 
-            // Los inyectamos justo ABAJO y AFUERA del marco (.video-container)
-            container.insertAdjacentElement('afterend', controls);
+                // Variables de estado de la imagen
+                let escalaActual = 1;
+                let posX = 0;
+                let posY = 0;
+                let arrastrando = false;
+                let startX, startY;
 
-            let escalaActual = 1;
+                // Aplicar estilos iniciales para permitir arrastre correcto
+                img.style.transformOrigin = "center center";
+                img.style.cursor = "grab";
+                img.style.userSelect = "none";
 
-            // Evento para Acercar
-            controls.querySelector('.btn-in').addEventListener('click', () => {
-                if (escalaActual < 3) { // Límite de zoom (300%)
-                    escalaActual += 0.25;
-                    img.style.transform = `scale(${escalaActual})`;
+                // Función centralizada para actualizar la posición y tamaño
+                function aplicarTransform(conAnimacion = false) {
+                    if (conAnimacion) {
+                        img.classList.add('zooming');
+                        setTimeout(() => img.classList.remove('zooming'), 250);
+                    }
+                    img.style.transform = `translate(${posX}px, ${posY}px) scale(${escalaActual})`;
                 }
-            });
 
-            // Evento para Alejar
-            controls.querySelector('.btn-out').addEventListener('click', () => {
-                if (escalaActual > 1) { // No deja que se haga más chica del tamaño original
-                    escalaActual -= 0.25;
-                    img.style.transform = `scale(${escalaActual})`;
-                }
-            });
+                // Evento Acercar
+                controls.querySelector('.btn-in').addEventListener('click', () => {
+                    if (escalaActual < 4) { // Límite máximo de zoom cercano
+                        escalaActual += 0.25;
+                        aplicarTransform(true);
+                    }
+                });
 
-            // Evento para reiniciar
-            controls.querySelector('.btn-reset').addEventListener('click', () => {
-                escalaActual = 1;
-                img.style.transform = `scale(${escalaActual})`;
+                // Evento Alejar (Ahora permite encogerse todo lo que quieras hacia adentro)
+                controls.querySelector('.btn-out').addEventListener('click', () => {
+                    if (escalaActual > 0.25) { // Permite reducirse hasta un 25% de su tamaño
+                        escalaActual -= 0.25;
+                        aplicarTransform(true);
+                    }
+                });
+
+                // Evento Reiniciar
+                controls.querySelector('.btn-reset').addEventListener('click', () => {
+                    escalaActual = 1;
+                    posX = 0;
+                    posY = 0;
+                    aplicarTransform(true);
+                });
+
+                /* ==========================================
+                   SISTEMA DRAG & DROP (MOVER CON EL MOUSE)
+                ========================================== */
+                img.addEventListener('mousedown', (e) => {
+                    e.preventDefault(); // Evita el arrastre por defecto del navegador
+                    arrastrando = true;
+                    img.style.cursor = "grabbing";
+                    
+                    // Calculamos el inicio del click relativo a la posición actual
+                    startX = e.clientX - posX;
+                    startY = e.clientY - posY;
+                });
+
+                // Escuchamos el movimiento de manera global para que no se tranque si el mouse sale rápido
+                window.addEventListener('mousemove', (e) => {
+                    if (!arrastrando) return;
+                    
+                    posX = e.clientX - startX;
+                    posY = e.clientY - startY;
+                    aplicarTransform(false); // Movimiento en tiempo real libre de delay
+                });
+
+                window.addEventListener('mouseup', () => {
+                    if (arrastrando) {
+                        arrastrando = false;
+                        img.style.cursor = "grab";
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
 
 </body>
 
