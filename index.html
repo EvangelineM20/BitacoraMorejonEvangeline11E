@@ -395,7 +395,7 @@ width: min(94%, 1150px);
                 <video controls>
 
                     <source
-                        src="recursos/PRIMER Y SEGUNDO CIRCUITO CÓDIGO - EVANGELINE 11E (1).mp4"
+                        src="PRIMER Y SEGUNDO CIRCUITO CÓDIGO - EVANGELINE 11E (1).mp4"
                         type="video/mp4"
                     >
 
@@ -419,7 +419,7 @@ width: min(94%, 1150px);
 
             <!-- CAMBIO: Añadimos el contenedor y limpiamos la etiqueta img -->
             <div class="video-container">
-                <img class="imagen-circuito" src="recursos/Foto de Circuito Semana 3 U3.jpg" alt="Circuito Arduino">
+                <img class="imagen-circuito" src="Foto de Circuito Semana 3 U3.jpg" alt="Circuito Arduino">
             </div>
 
         </div> <!-- Te faltaba cerrar este div de la semana en tu código original, ¡ojo ahí! -->
@@ -448,6 +448,77 @@ width: min(94%, 1150px);
 
     </footer>
 
+    <!-- ==========================================
+       SCRIPT DE JAVASCRIPT PARA EL ZOOM AUTOMÁTICO
+    ========================================== */ -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Buscamos todos los contenedores de video/imagen de la página
+            const containers = document.querySelectorAll('.video-container');
+            
+            containers.forEach(container => {
+                // Revisamos si este contenedor tiene una imagen adentro (los videos los ignoramos)
+                const img = container.querySelector('img');
+                if (!img) return; 
+
+                // 1. Creamos el contenedor flotante para los botones
+                const controls = document.createElement('div');
+                controls.className = 'zoom-controls';
+
+                // 2. Creamos el botón de Zoom In (+)
+                const btnIn = document.createElement('button');
+                btnIn.className = 'zoom-btn';
+                btnIn.textContent = '+';
+                btnIn.title = 'Acercar';
+
+                // 3. Creamos el botón de Zoom Out (-)
+                const btnOut = document.createElement('button');
+                btnOut.className = 'zoom-btn';
+                btnOut.textContent = '-';
+                btnOut.title = 'Alejar';
+
+                // 4. Creamos el botón de Reiniciar (↺)
+                const btnReset = document.createElement('button');
+                btnReset.className = 'zoom-btn';
+                btnReset.textContent = '↺';
+                btnReset.title = 'Restablecer';
+
+                // Agrupamos los botones dentro de la cajita flotante
+                controls.appendChild(btnIn);
+                controls.appendChild(btnOut);
+                controls.appendChild(btnReset);
+                container.appendChild(controls);
+
+                // Configuración interna del nivel del Zoom
+                let escalaActual = 1;
+                const maxEscala = 3;    // Máximo zoom (300%)
+                const minEscala = 1;    // Mínimo zoom (Tamaño normal)
+                const paso = 0.25;      // Qué tanto se acerca/aleja en cada click
+
+                // Evento para Acercar
+                btnIn.addEventListener('click', () => {
+                    if (escalaActual < maxEscala) {
+                        escalaActual += paso;
+                        img.style.transform = `scale(${escalaActual})`;
+                    }
+                });
+
+                // Evento para Alejar
+                btnOut.addEventListener('click', () => {
+                    if (escalaActual > minEscala) {
+                        escalaActual -= paso;
+                        img.style.transform = `scale(${escalaActual})`;
+                    }
+                });
+
+                // Evento para reiniciar a tamaño original
+                btnReset.addEventListener('click', () => {
+                    escalaActual = 1;
+                    img.style.transform = `scale(${escalaActual})`;
+                });
+            });
+        });
+    </script>
 
 </body>
 
